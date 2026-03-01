@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Для Дмитрия</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #c0392b;
+    --red-dark: #96281b;
+    --gold: #c8973a;
+    --gold-light: #f0c060;
+    --bg: #fef7f2;
+    --text: #2c1810;
+    --text-soft: #7a4a3a;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: radial-gradient(circle, rgba(192,57,43,0.06) 1.2px, transparent 1.2px);
+    background-size: 28px 28px;
+    pointer-events: none; z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 8% 8%, rgba(192,57,43,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 92% 92%, rgba(200,151,58,0.06) 0%, transparent 55%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .hero {
+    position: relative; z-index: 2;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 80px 30px 60px;
+  }
+
+  .hero-for {
+    font-size: clamp(1rem, 2.5vw, 1.2rem); font-style: italic;
+    color: var(--text-soft); opacity: 0; animation: up 1s ease 0.7s forwards;
+    margin-bottom: 10px; font-weight: 300;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant', serif;
+    font-size: clamp(5rem, 16vw, 11rem); font-weight: 700; line-height: 0.95;
+    opacity: 0; animation: up 1s ease 1s forwards;
+    background: linear-gradient(135deg, var(--red-dark) 0%, var(--red) 50%, var(--gold) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    margin-bottom: 20px; letter-spacing: -2px;
+  }
+
+  .hero-desc {
+    max-width: 540px; font-size: clamp(1rem, 2vw, 1.15rem); line-height: 1.9;
+    color: var(--text-soft); font-weight: 300; opacity: 0; animation: up 1s ease 1.6s forwards;
+  }
+
+  .hero-hint {
+    font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--red); opacity: 0; animation: fadein 1s ease 2.2s forwards;
+    margin-top: 60px; display: flex; flex-direction: column; align-items: center; gap: 10px;
+    cursor: pointer;
+  }
+  .arrow {
+    width: 14px; height: 14px;
+    border-right: 2px solid var(--red); border-bottom: 2px solid var(--red);
+    transform: rotate(45deg); animation: bob 1.8s ease infinite;
+  }
+  @keyframes bob {
+    0%,100% { transform: rotate(45deg) translateY(0); }
+    50% { transform: rotate(45deg) translateY(6px); }
+  }
+
+  .section {
+    position: relative; z-index: 2;
+    padding: 80px 40px 100px; text-align: center;
+  }
+
+  .section-eyebrow {
+    font-size: 0.75rem; letter-spacing: 6px; text-transform: uppercase;
+    color: var(--red); margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant', serif;
+    font-size: clamp(1.6rem, 4vw, 2.5rem); font-style: italic;
+    color: var(--text); margin-bottom: 10px;
+  }
+
+  .section-sub {
+    font-size: 0.92rem; color: var(--text-soft); font-weight: 300;
+    margin-bottom: 64px; letter-spacing: 1px;
+  }
+
+  .grid {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 48px 28px; max-width: 900px; margin: 0 auto;
+    justify-items: center;
+  }
+  @media (max-width: 700px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 32px 18px; } }
+  @media (max-width: 460px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 28px 18px; } }
+
+  /* === ENVELOPE === */
+  .env-wrap {
+    display: flex; flex-direction: column; align-items: center; gap: 12px; cursor: pointer;
+  }
+
+  .env {
+    position: relative; width: 116px; height: 86px; cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    filter: drop-shadow(0 5px 14px rgba(192,57,43,0.2));
+  }
+  .env:hover {
+    transform: translateY(-14px) scale(1.1) rotate(-1.5deg);
+    filter: drop-shadow(0 24px 40px rgba(192,57,43,0.35));
+  }
+
+  .env-letter {
+    position: absolute; bottom: 4px; left: 50%;
+    transform: translateX(-50%);
+    width: 80px; height: 58px;
+    background: linear-gradient(180deg, #fffdf8 0%, #fff5ec 100%);
+    border-radius: 3px; z-index: 0;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.45s cubic-bezier(0.34,1.5,0.64,1) 0.06s;
+    overflow: hidden;
+  }
+  .env-letter::before {
+    content: '';
+    position: absolute; top: 10px; left: 9px; right: 9px;
+    height: 1.5px; background: rgba(192,57,43,0.2); border-radius: 1px;
+    box-shadow: 0 7px 0 rgba(192,57,43,0.14), 0 14px 0 rgba(192,57,43,0.09), 0 21px 0 rgba(192,57,43,0.06);
+  }
+  .env-letter::after {
+    content: '♥';
+    position: absolute; bottom: 5px; right: 8px;
+    font-size: 10px; color: rgba(192,57,43,0.3);
+  }
+  .env:hover .env-letter {
+    transform: translateX(-50%) translateY(-28px);
+  }
+
+  .env-body {
+    position: absolute; inset: 0;
+    background: linear-gradient(155deg, #e03c2e 0%, #a82318 100%);
+    border-radius: 6px; z-index: 1;
+  }
+  .env-body::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(160deg, rgba(255,255,255,0.14) 0%, transparent 50%);
+    border-radius: 6px;
+  }
+
+  .env-left {
+    position: absolute; top: 0; left: 0; width: 0; height: 0;
+    border-top: 43px solid transparent; border-bottom: 43px solid transparent;
+    border-left: 60px solid rgba(110,18,10,0.28); z-index: 2;
+  }
+  .env-right {
+    position: absolute; top: 0; right: 0; width: 0; height: 0;
+    border-top: 43px solid transparent; border-bottom: 43px solid transparent;
+    border-right: 60px solid rgba(80,12,6,0.22); z-index: 2;
+  }
+  .env-bottom {
+    position: absolute; bottom: 0; left: 0; width: 0; height: 0;
+    border-left: 58px solid transparent; border-right: 58px solid transparent;
+    border-bottom: 42px solid rgba(120,22,12,0.35); z-index: 2;
+  }
+
+  .env-flap {
+    position: absolute; top: 0; left: 0; width: 0; height: 0;
+    border-left: 58px solid transparent; border-right: 58px solid transparent;
+    border-top: 46px solid #8c1e0f;
+    z-index: 3; transform-origin: top center;
+    transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+  }
+  .env:hover .env-flap { transform: rotateX(178deg); }
+
+  .seal {
+    position: absolute; width: 30px; height: 30px;
+    background: radial-gradient(circle at 38% 32%, #f7df80, #c8973a 55%, #8a6020);
+    border-radius: 50%; z-index: 4;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: rgba(70,35,0,0.65);
+    transition: opacity 0.3s, transform 0.35s;
+  }
+  .env:hover .seal { opacity: 0; transform: translate(-50%,-50%) scale(0.3); }
+
+  .env-label {
+    font-family: 'Cormorant', serif; font-size: 0.82rem;
+    color: var(--text-soft); text-align: center; max-width: 120px;
+    line-height: 1.3; transition: color 0.3s;
+  }
+  .env-wrap:hover .env-label { color: var(--red); }
+
+  /* === MODAL === */
+  .overlay {
+    position: fixed; inset: 0; background: rgba(50,15,8,0.5);
+    z-index: 200; display: flex; align-items: center; justify-content: center;
+    padding: 20px; opacity: 0; visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease; backdrop-filter: blur(12px);
+  }
+  .overlay.open { opacity: 1; visibility: visible; }
+
+  .modal {
+    background: var(--white); border: 1px solid rgba(192,57,43,0.1);
+    border-radius: 20px; max-width: 560px; width: 100%;
+    padding: 52px 44px 44px; position: relative;
+    max-height: 88vh; overflow-y: auto;
+    transform: scale(0.88) translateY(24px);
+    transition: transform 0.45s cubic-bezier(0.34,1.4,0.64,1);
+    box-shadow: 0 40px 100px rgba(192,57,43,0.14), 0 8px 30px rgba(0,0,0,0.07);
+  }
+  .overlay.open .modal { transform: scale(1) translateY(0); }
+
+  .modal-close {
+    position: absolute; top: 14px; right: 16px;
+    background: rgba(192,57,43,0.07); border: none; color: var(--text-soft);
+    font-size: 1.1rem; cursor: pointer; width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, color 0.2s, transform 0.3s;
+  }
+  .modal-close:hover { background: rgba(192,57,43,0.15); color: var(--red); transform: rotate(90deg); }
+
+  /* === AVATAR + NAME HEADER === */
+  .modal-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 4px;
+  }
+
+  .modal-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -1px;
+    box-shadow: 0 6px 20px rgba(192,57,43,0.3), inset 0 1px 0 rgba(255,255,255,0.25);
+    position: relative;
+    overflow: hidden;
+    /* background задаётся из JS */
+  }
+
+  /* Декоративный блик */
+  .modal-avatar::after {
+    content: '';
+    position: absolute;
+    top: -30%;
+    left: -20%;
+    width: 70%;
+    height: 60%;
+    background: radial-gradient(ellipse, rgba(255,255,255,0.35) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: rotate(-30deg);
+  }
+
+  /* Если это <img> — скрываем инициалы */
+  .modal-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    position: absolute;
+    inset: 0;
+  }
+
+  .modal-name {
+    font-family: 'Cormorant', serif;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .modal-story {
+    font-size: 1.05rem; line-height: 1.9; color: var(--text-soft);
+    font-weight: 300; font-style: italic; margin-top: 20px; padding-top: 0;
+  }
+
+  .modal::-webkit-scrollbar { width: 4px; }
+  .modal::-webkit-scrollbar-track { background: transparent; }
+  .modal::-webkit-scrollbar-thumb { background: rgba(192,57,43,0.25); border-radius: 2px; }
+
+  @keyframes up {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-for">для нашего наставника</div>
+  <h1 class="hero-name">Дмитрий</h1>
+  <p class="hero-desc">
+    Мы приготовили для Вас двадцать конвертов. В каждом — личная история одного из нас: как Вы изменили что-то важное в нашей жизни, работе, мышлении. Открывайте по одному.
+  </p>
+  <div class="hero-hint" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})">
+    <span>Открыть конверты</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-eyebrow">Двадцать историй</div>
+  <h2 class="section-title">Что Вы изменили в каждом из нас</h2>
+  <p class="section-sub">Нажмите на конверт — и прочитайте</p>
+  <div class="grid" id="grid"></div>
+</section>
+
+<div class="overlay" id="overlay" onclick="outsideClose(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeCard()">✕</button>
+    <div class="modal-header">
+      <div class="modal-avatar" id="mAvatar"></div>
+      <div class="modal-name" id="mName"></div>
+    </div>
+    <div class="modal-story" id="mStory"></div>
+  </div>
+</div>
+
+<script>
+const people = [
+  { name: "Одиссей",   photo: '/Users/Arina/Desktop/сайт для наставника/Odysseus.jpeg', story: "Дмитрий, я благодарен вам за интересные концепции, необычные задания, которые направлены на развитие каждого из нас. Больше всего на меня повлиял наверное ваш интеллектуально-гуманистический подход, который  обостряет осознание личной ответственности в нашем взаимодействии. Сначала я воспринимал это с сопротивлением, это было непонятно для меня, но это мудрая позиция, кусочками которой я теперь пользуюсь и улучшаю качество взаимодействия с людьми. Спасибо вам за то что считаете важным вкладываться в нас, с днем наставника!" },
+  { name: "Ирина",     photo: '/Users/Arina/Desktop/сайт для наставника/Ira.jpeg', story: "В моём сознании ярче всего отпечатались ваши слова о том насколько нам важны те или иные вещи. Вспомнила о них в момент, когда боялась рискнуть всем комфортом и поехать на пол года учиться в Китай. Поняла, что второе важнее и столько опыта благодаря этому получила. Спасибо за ваш вклад в наше мировоззрение!" },
+  { name: "Арина",     photo: '/Users/Arina/Desktop/сайт для наставника/Arina.jpeg', story: "Дмитрий, благодаря Вам я учусь быть менее категоричной и принимать, что единственно правильного ответа не существует. Мир слишком разный, у каждого свой путь и свои обстоятельства — и то, что кажется чужим выбором, в его контексте, возможно, было единственно возможным. Нельзя осуждать человека за то, что его путь не совпадает с твоим. Нельзя осуждать людей, оставшихся без дома — можно только помогать тем, кому нужна твоя помощь. Я учусь у Вас общаться с позиции равного: не свысока и не снизу, а на одном уровне с каждым." },
+  { name: "Юрий",      photo: '/Users/Arina/Desktop/сайт для наставника/Jura.jpeg', story: "Дмитрий, благодаря вам мое отношение к людям значительно поменялось. Мне стало легче заводить полезные знакомства и узнавать людей получше. Очень вдохновила и вдохновляет по сей день ваша фраза «Это не человек плохой - это человеку плохо». Она выручает.<br><br>Можно ещё долго говорить про то, что благодаря вам у меня значительно выросла дисциплина, социальный капитал, появились полезные привычки и так далее. Я хочу вам сказать спасибо просто за то, что вы с нами. Что вы взяли на себя ответственность принять участие в построении нашего будущего. Что вы выделяете своё по-настоящему бесценное время, чтобы оставить внутри нас частичку себя, чтобы сделать нас лучше. Вы - наш проводник в лучший мир, полный возможностей и открытий. <br><br>Мы невероятно ценим это и уверяем вас, что в будущем это обязательно принесет свои плоды. Нам с вами ещё многому предстоит научиться. И это прекрасно." },
+  { name: "Артём",     photo: '/Users/Arina/Desktop/сайт для наставника/ArtemM.png', story: "Дмитрий одно из главных чему я учусь у вас - это иначе относиться к людям. Уметь уважать и ценить любого человека и его мнение абстрагируясь от достижений и регалий - это дорогого стоит. Например: обращение с каждым из нашей группы на «вы». Благодарю вас за этот пример, это очень ценно!" },
+  { name: "Дмитрий",   photo: '/Users/Arina/Desktop/сайт для наставника/Dmitry.png', story: "С Днём наставника!<br><br>Благодаря вам я переосмыслил «важность», научился благодарить, осознал, как многое на самом деле имею, научился уважать труд и людей, переосмыслил свои интересы и привычки. Большое спасибо, что помогаете меняться и расти над собой."},
+  { name: "Таисия",    photo: '/Users/Arina/Desktop/сайт для наставника/Tasya.png', story: "Спасибо вам за то, что помогаете нам стать лучшими людьми. Мы очень ценим ваше стремление направить нас на правильный путь. Знания и навыки, которые вы даете нам, уже часто применяются нами на практике. Атмосфера в нашей группе потрясающая, и все это благодаря вам.<br>Спасибо за то, что вы наш наставник!" },
+  { name: "Сергей",    photo: '/Users/Arina/Desktop/сайт для наставника/Sergey.png', story: "Спасибо за то, что находите время делиться своим опытом, мышлением и принципами с нами. Ваши советы помогают по-другому смотреть на жизнь, брать ответственность и смелее идти к своим целям. Благодаря вам, я смог наладить отношения в семье, стал гораздо яснее понимать, куда иду, и перестал откладывать желаемые в реализации проекты на потом. Это ценно." },
+  { name: "Ярослав",   photo: '/Users/Arina/Desktop/сайт для наставника/Yaroslav.png', story: "Вы полностью изменили моё отношение к точкам зрения других людей. Раньше я был уверен, что если мнение отличается от моего, значит оно ошибочное. Я воспринимал его почти как вызов для меня, и внутри автоматически включалась защита. Вы помогли мне понять, что у людей не «неправильная» позиция - у них своя картина мира и свой опыт. И вместо того чтобы отталкивать это, можно остановиться и попробовать услышать. Это научило меня не спорить ради спора, а слушать и слышать людей. Сейчас я чувствую, что стал спокойнее и взрослее благодаря вашему совету. Огромное Вам спасибо." },
+  { name: "Матвей",    photo: '/Users/Arina/Desktop/сайт для наставника/Matvey.jpeg', story: "Дмитрий, все встречи с Вами понемногу расширяют границы и сдвигают вектор жизни в лучшую сторону. Благодаря Вам я стал чаще и дальше выходить из зоны комфорта, приобрел много полезных привычек и, как мне кажется, стал чуть лучше понимать жизнь и самого себя. Я искренне рад, что проект свел нас именно с Вами, потому что более интересного, мудрого, внимательного наставника сложно представить. Поздравляю с Вашим днем!" },
+  { name: "Адриана",   photo: '/Users/Arina/Desktop/сайт для наставника/Adriana.png', story: "Вы перевернули моё отношение к «зоне комфорта». Раньше я бежала оттуда, где трудно, и боялся отвечать за результат в нестабильной среде. Вы доказали на своем примере, что ответственность — это не груз, а двигатель, а дискомфорт - единственная возможность роста. Спасибо за это умение." },
+  { name: "Мария",     photo: '/Users/Arina/Desktop/сайт для наставника/Masha.gif', story: "Дмитрий, спасибо большое за то, что дарите нам возможность посещать события и разговоры, которые вы с командой трепетно организовываете. Спасибо вам за то, что своим примером показываете как классно дружить, общаться, доверять, быть открытым миру, что строить бизнес это безопасно и очень-очень ценно для нашей страны и её жителей, выстраивать душевные, надёжные и эффективные партнёрства это возможно, это не случайность и к этому можно прийти, что можно заниматься делом от которого горят глаза и при этом иметь любящую и любимую семью. Спасибо вам за то, что делитесь с нами не только своими победами, но и рассказываете про непростые периоды в жизни. Спасибо вам за то, что даёте нам пространство для роста, выбора и самостоятельности, не давите с отчётами и дедлайнами, тем самым взращивая в нас ответственность и осознанность, чтобы мы сами понимали зачем нам что-то и к чему нас это приведёт. Спасибо за ваше время и энергию, за всё, что вы делаете для нас!))" },
+  { name: "Антон",     photo: '/Users/Arina/Desktop/сайт для наставника/Anton.png', story: "Огромное влияние на меня произвела вторая встреча. На тот момент я перестал быть бизнес-ассистентом и открывал свой продакшн. Дмитрий сделал «мини-разбор» моей ситуации и подсветил огромное количество веток для роста. Особенно полезным стал совет про синдром ямы, проанализировав который, я смог избежать ряда ошибок.<br><br>Мне тяжело выделять отдельные моменты, ибо каждая минута со встреч приносила мне пользу, я невероятно благодарен Дмитрию за то, что он для нас делает." },
+  { name: "Юмжана",    photo: '/Users/Arina/Desktop/сайт для наставника/Yumzhana.jpeg', story: "Благодаря Дмитрию, я поняла, что можно, и правда, не зависеть от мнения окружающих, что это не страшно. Ещё я стала больше ценить своё чувство юмора, потому что мне отчего-то кажется, что оно у нас схожее!" },
+  { name: "Елизавета", photo: '/Users/Arina/Desktop/сайт для наставника/Lisa.jpeg', story: "Дмитрий, благодаря вам, я больше не откладываю важные задачи на «потом», а выполняю все во время и заранее. Я ответственнее отношусь ко времени и теперь правильно его распределяю, а ещё, всегда добиваюсь результата, если понимаю, что для меня это важно. Спасибо вам за ваш труд!" },
+  { name: "Артём",     photo: '/Users/Arina/Desktop/сайт для наставника/ArtemG.jpeg', story: "Благодаря вам, понял как принимать и давать обратную связь, стал более счастливым и осознанным." },
+  { name: "Андрей",    photo: '/Users/Arina/Desktop/сайт для наставника/Andrey.png', story: "Для меня Дмитрий каждый день влияет на мое понимание жизни. Раньше я думал, что те, кто зарабатывают большие деньги - это всегда холоднокровные люди, готовые идти по головам, и я думал, что так делают все, но Дмитрий за эти полтора года для меня стал примером, как можно построить что-то очень большое на очень светлых ценностях, бескорыстно помогать людям, постоянно совершать «обмен с превышением», а еще для меня стало открытием, как можно при такой загрузке и режиме иметь такие отношения в семье. Очень хочется перенять все эти ценности и использовать их в своей жизни." },
+  { name: "Степан",    photo: '/Users/Arina/Desktop/сайт для наставника/Stepan.png', story: "Благодаря Дмитрию я сделал гиперскачок в плане эмоциональной зрелости — у меня прокачался внутренний стержень. Всё началось, конечно, с нашего опоздания на первую встречу, где нам сразу объяснили значение слова «важно»))<br>Далее, когда были разборы на второй встрече, я забрал важные мысли для себя, которые даже не относились к моему разбору, но проблема моего одногруппника была актуальна и для меня тоже. Так, после Ваших слов о том, что нельзя сожалеть о прошлом, во мне будто что-то щёлкнуло внутри: раз наставник так сказал, значит, нужно это сделать без капли сомнения!<br>Мой разбор сильно повлиял на вектор проработки моего мышления. Оказалось, что то, что мы внутри не хотим признавать до последнего, является неприятной правдой. Я понял, что зависим от мнения окружающих. Мне хотелось, чтобы меня похвалили, но когда я делаю что-то не так, я сразу становлюсь «плохим».<br>Честно говоря, я переборол это не сразу, но если смотреть на мои выигрыши за 2025 год, то в этих моментах я смог преодолеть именно этот страх.<br>Так, на кейс-чемпионате в Skolkovo, который был для меня важен в связи с поступлением, я предложил свою бизнес-идею (хотя переживал, что её просто засмеют), и она понравилась команде, а также жюри, которое отдало нам победу!<br>Был и момент, когда я сомневался в участии в турнире по футболу в «Аномалии», так как я достаточно плохо играл до этого у себя на районе. Но, преодолев страх того, что подумают другие, и благодаря поддержке Антона, я решил участвовать, тренировался, принимал участие в товарищеских матчах — и мы взяли кубок!<br>В мае 2025 года, когда я выполнял декларацию «устроиться бизнес-ассистентом за месяц», я подходил к предпринимателям на форуме в МГУ, задавал вопросы на лекциях перед личным разговором, чтобы запомниться большой аудитории. И я устроился к топ-предпринимателю даже после нескольких отказов от других и даже мелких насмешек со стороны случайных ребят)<br>Я шёл в свой страх — это дало большие результаты, и это было круто!<br>Огромное спасибо Дмитрию за уделённое нам время и энергию. Мы всей группой с нетерпением ждём каждой встречи, чтобы оторваться от повседневных дел, собраться нашим уютным составом и познавать что-то новое для себя)" },
+  { name: "Владимир",  photo: '/Users/Arina/Desktop/сайт для наставника/Vladimir.png', story: "Дмитрий, благодаря вам я всё глубже понимаю, что такое настоящее бизнес-партнёрство и как правильно выстраивать его у себя. <br><br>Но самое ценное, чему я учусь у вас - это быть хорошим человеком." }
+];
+
+
+const gradients = [
+  'linear-gradient(135deg, #c0392b 0%, #8c1e0f 100%)',
+  'linear-gradient(135deg, #c8973a 0%, #96681a 100%)',
+  'linear-gradient(135deg, #a82318 0%, #c0392b 60%, #c8973a 100%)',
+  'linear-gradient(135deg, #7b241c 0%, #c0392b 100%)',
+  'linear-gradient(135deg, #b7770d 0%, #c8973a 100%)',
+  'linear-gradient(135deg, #922b21 0%, #d35400 100%)',
+  'linear-gradient(135deg, #6e2c00 0%, #c8973a 100%)',
+];
+
+
+function initials(name) {
+  return name.trim().charAt(0).toUpperCase();
+}
+
+const grid = document.getElementById('grid');
+people.sort((a, b) => a.name.localeCompare(b.name, 'ru'));
+
+people.forEach((p, i) => {
+  const wrap = document.createElement('div');
+  wrap.className = 'env-wrap';
+  wrap.setAttribute('onclick', `openCard(${i})`);
+  wrap.innerHTML = `
+    <div class="env">
+      <div class="env-letter"></div>
+      <div class="env-body"></div>
+      <div class="env-left"></div>
+      <div class="env-right"></div>
+      <div class="env-bottom"></div>
+      <div class="env-flap"></div>
+      <div class="seal">✦</div>
+    </div>
+    <div class="env-label">${p.name}</div>
+  `;
+  grid.appendChild(wrap);
+});
+
+function openCard(i) {
+  const p = people[i];
+  const avatarEl = document.getElementById('mAvatar');
+
+
+  avatarEl.innerHTML = '';
+
+  if (p.photo) {
+
+    const img = document.createElement('img');
+    img.src = p.photo;
+    img.alt = p.name;
+    avatarEl.appendChild(img);
+    avatarEl.style.background = 'transparent';
+  } else {
+    const grad = gradients[i % gradients.length];
+    avatarEl.style.background = grad;
+    avatarEl.textContent = initials(p.name);
+  }
+
+  document.getElementById('mName').textContent = p.name;
+  document.getElementById('mStory').innerHTML = p.story;
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCard() {
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function outsideClose(e) {
+  if (e.target === document.getElementById('overlay')) closeCard();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCard(); });
+</script>
+</body>
+</html>
